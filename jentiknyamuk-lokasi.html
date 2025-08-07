@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>JentikNyamuk - Pengaduan Lokasi</title>
+    <style>
+        body {
+            background-color: #007BFF;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        button {
+            background-color: white;
+            color: #007BFF;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e0e0e0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JentikNyamuk - Kirim Lokasi</h1>
+    <p>Silakan tekan tombol di bawah ini untuk mengirim lokasi Anda ke WhatsApp admin.</p>
+    <button onclick="kirimLokasi()">📍 Kirim Lokasi ke WhatsApp</button>
+
+    <script>
+        function kirimLokasi() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(pos) {
+                    var lat = pos.coords.latitude;
+                    var lng = pos.coords.longitude;
+                    var lokasiURL = "https://www.google.com/maps?q=" + lat + "," + lng;
+                    var nomorAdmin = "6281524219699";
+                    var pesan = "Halo Admin, saya ingin melaporkan keberadaan jentik nyamuk.%0ALokasi saya: " + lokasiURL;
+                    window.open("https://wa.me/" + nomorAdmin + "?text=" + pesan, "_blank");
+                }, function() {
+                    alert("Tidak dapat mengambil lokasi. Aktifkan GPS dan izinkan akses lokasi.");
+                });
+            } else {
+                alert("Browser Anda tidak mendukung geolocation.");
+            }
+        }
+    </script>
+</body>
+</html>
